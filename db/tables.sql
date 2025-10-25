@@ -31,10 +31,18 @@ CREATE TABLE AbsentStudent (
 );
 
 
+-- this when the teacher mark the attendance and the data will be stored here
+-- if we want to see the attendance of a student we will query this table , for example for its absent record number
 CREATE TABLE AttendanceRecord (
     studentName TEXT REFERENCES Students(name),
     lectureName TEXT REFERENCES Lectures(name),
     stage TEXT REFERENCES Students(stage),
-    date TEXT not null,
+    date DATE not null,
     status TEXT not null check (status in ('Present', 'Absent', "Excused"))
+);
+
+CREATE Table DashboardAttendance (
+    lectureName TEXT REFERENCES Lectures(name),
+    studentName TEXT REFERENCES Students(name),
+    asbentRecord TEXT REFERENCES AttendanceRecord(status)
 );
