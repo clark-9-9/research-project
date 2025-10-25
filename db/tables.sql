@@ -19,22 +19,22 @@ CREATE TABLE Students (
 
 CREATE TABLE TimeTable (
     stage TEXT not null,
-    lecture TEXT FOREIGN KEY REFERENCES Lectures(name),
+    lecture TEXT REFERENCES Lectures(name),
     timeSlot TEXT not null,
-    responsibleStaff TEXT FOREIGN KEY REFERENCES AcademicStaff(name)
+    responsibleStaff TEXT REFERENCES AcademicStaff(name)
 );
 
 
 CREATE TABLE AbsentStudent (
-    studentName TEXT FOREIGN KEY REFERENCES Students(name),
-    lectureName TEXT FOREIGN KEY REFERENCES Lectures(name)
+    studentName TEXT REFERENCES Students(name),
+    lectureName TEXT REFERENCES Lectures(name)
 );
 
 
 CREATE TABLE AttendanceRecord (
-    studentName TEXT FOREIGN KEY REFERENCES Students(name),
-    lectureName TEXT FOREIGN KEY REFERENCES Lectures(name),
-    stage TEXT foreign KEY REFERENCES Students(stage),
+    studentName TEXT REFERENCES Students(name),
+    lectureName TEXT REFERENCES Lectures(name),
+    stage TEXT REFERENCES Students(stage),
     date TEXT not null,
     status TEXT not null check (status in ('Present', 'Absent', "Excused"))
 );
